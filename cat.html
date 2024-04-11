@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Коты и мыши</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .text-block {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .cat-word {
+            display: inline-block;
+        }
+        .cat-word-text {
+            display: inline;
+        }
+        .cat-image {
+            display: none;
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="text-block">
+        <h2><p>КОТ - это домашнее животное, которое любит играть с мышами. КОТ может проводить часы, наблюдая за мышью. Но не каждый КОТ любит мышей.</p></h2>
+    </div>
+    <div class="text-block">
+        <h2><p>КОТ и мыши - это классическая тема для мультфильмов и рассказов. Все мы знаем историю о том, как КОТ пытается поймать мышь, но мышь всегда ускользает.</p>
+    </div>
+    <audio id="cat-sound" src="audio/cat.mp3" preload="auto"></audio>
+    <script>
+        $(document).ready(function(){
+            var catSound = document.getElementById('cat-sound');
+            $("p:contains('КОТ')").each(function(){
+                var html = $(this).html();
+                html = html.replace(/КОТ/g, '<span class="cat-word"><span class="cat-word-text">КОТ</span><img src="images/cat.gif" class="cat-image" /></span>');
+                $(this).html(html);
+            });
+            $(".cat-word").hover(function(){
+                $(this).find('.cat-image').show();
+                $(this).find('.cat-word-text').hide();
+                catSound.play();
+            }, function(){
+                $(this).find('.cat-image').hide();
+                $(this).find('.cat-word-text').show();
+                catSound.pause();
+                catSound.currentTime = 0;
+            });
+        });
+    </script>
+    <a href="index.html">Вернуться на главную</a>
+</body>
+</html>

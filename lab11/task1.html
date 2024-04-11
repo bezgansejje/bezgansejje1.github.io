@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form>
+    <label for="number1">Введите первое число:</label>
+    <input type="text" id="number1" name="number1">
+    <br>
+    <label for="number2">Введите второе число:</label>
+    <input type="text" id="number2" name="number2">
+    <br>
+    <button onclick="compareAndPrint()">Сравнить числа</button>
+  </form>
+  
+<script>
+  function compareAndPrint() {
+    var a = parseFloat(document.getElementById('number1').value);
+    var b = parseFloat(document.getElementById('number2').value);
+
+    if (!isNaN(a) && !isNaN(b)) {
+      if (a > b) {
+        alert(a);
+      } else {
+        alert(a + " и " + b);
+      }
+    } else {
+      alert("Пожалуйста, введите действительные числа.");
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Данные о населении воеводств
+    var voivodeshipData = {
+    "Варминьско-Мазурское": {population: 1433772, center: "Ольштын", area: 24100},
+    "Великопольское": {population: 3495470, center: "Познань", area: 29826},
+    "Мазовецкое": {population: 5432000, center: "Варшава", area: 35558},
+    "Нижнесилезское": {population: 2899986, center: "Вроцлав", area: 19946},
+    "Малопольское": {population: 2333576, center: "Краков", area: 15182},
+    "Поморское": {population: 2333576, center: "Гданьск", area: 18310},
+    "Силезское": {population: 4546840, center: "Катовице", area: 12333},
+    "Лодзинское": {population: 2466476, center: "Лодзь", area: 18218},
+    "Подляское": {population: 1188800, center: "Белосток", area: 20187},
+    "Подкарпатское": {population: 2128747, center: "Жешув", area: 17845},
+    "Опольское": {population: 966000, center: "Ополе", area: 9411},
+    "Западно-Поморское": {population: 1685813, center: "Щецин", area: 22892},
+    "Люблинское": {population: 2104393, center: "Люблин", area: 25122},
+    "Свентокшиское": {population: 1243516, center: "Кельце", area: 11710},
+    "Куявско-Поморское": {population: 2079900, center: "Быдгощ, Торунь", area: 17971},
+    "Любуское": {population: 1022500, center: "Зелёна-Гура", area: 13987},
+    }
+
+// Создание массивов меток и данных для диаграммы
+var labels = Object.keys(voivodeshipData);
+var data = Object.values(voivodeshipData).map(function(voivodeship) {
+    return voivodeship.population;
+});
+
+// Создание диаграммы
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Население',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // цвет заливки
+            borderColor: 'rgba(75, 192, 192, 1)', // цвет границы
+            borderWidth: 1 // ширина границы
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    // Эта функция будет вызываться для каждого элемента в подсказке
+                    label: function(context) {
+                        var label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += new Intl.NumberFormat('ru-RU').format(context.parsed.y);
+                        // Добавьте здесь любую дополнительную информацию
+                        var voivodeship = voivodeshipData[context.label];
+                        label += '\nАдминистративный центр: ' + voivodeship.center;
+                        label += '\nПлощадь: ' + voivodeship.area + ' км²';
+                        return label;
+                    }
+                }
+            }
+        }
+    }
+});
+
+  </script>
+<a href="index.html">Вернуться на главную</a>
+</body>
+</html>

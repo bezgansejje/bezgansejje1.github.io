@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="tourismForm">
+    <label for="name">Ваше имя:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="email">Ваш email:</label><br>
+    <input type="email" id="email" name="email" required><br>
+    <label for="destination">Выберите пункт назначения:</label><br>
+    <select id="destination" name="destination">
+        <option value="">Выберите...</option>
+        <option value="paris">Париж</option>
+        <option value="rome">Рим</option>
+        <option value="london">Лондон</option>
+    </select><br>
+    <label for="comments">Комментарии:</label><br>
+    <textarea id="comments" name="comments"></textarea><br>
+    <input type="checkbox" id="newsletter" name="newsletter">
+    <label for="newsletter">Подписаться на новостную рассылку</label><br>
+    <button type="submit">Отправить</button>
+</form>
+
+<button onclick="displayData()">Показать данные</button>
+<div id="displayArea"></div>
+
+<script src="JS/validation.js"></script>
+<script src="JS/formHandler.js"></script>
+<a href="index.html">Вернуться на главную</a>
+</body>
+</html>
